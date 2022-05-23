@@ -14,6 +14,22 @@ jobs:
         go: [ '1.18' ]
         os: [ 'ubuntu-latest', 'windows-latest' ]
     runs-on: ${{ matrix.os }}
+
+    services:
+      # Label used to access the service container
+      redis:
+        # Docker Hub image
+        image: redis
+        # Set health checks to wait until redis has started
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          # Maps port 6379 on service container to the host
+          - 6379:6379
+
     steps:
       - uses: actions/checkout@v3
 
@@ -27,3 +43,4 @@ jobs:
 
       - name: Test
         run: go test -v -race ./... -coverprofile=coverage.txt -covermode=atomic -timeout=10m
+        if: matrix.os == 'ubuntu-latest'
