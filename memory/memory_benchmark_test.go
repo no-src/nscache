@@ -6,21 +6,22 @@ import (
 	"github.com/no-src/nscache"
 )
 
-func BenchmarkGet(b *testing.B) {
+func BenchmarkMemoryCache_Get(b *testing.B) {
 	c, _ := nscache.NewCache(connectionString)
-	c.Set("hello", "world")
+	c.Set("hello", "world", expiration)
 	b.ResetTimer()
 	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
-		c.Get("hello")
+		var v string
+		c.Get("hello", &v)
 	}
 }
 
-func BenchmarkSet(b *testing.B) {
+func BenchmarkMemoryCache_Set(b *testing.B) {
 	c, _ := nscache.NewCache(connectionString)
 	b.ResetTimer()
 	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
-		c.Set("hello", "world")
+		c.Set("hello", "world", expiration)
 	}
 }
