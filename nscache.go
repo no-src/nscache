@@ -10,7 +10,7 @@ import (
 // NSCache the core interface of the cache
 type NSCache interface {
 	// Get get cache data by key
-	Get(k string, v any) (err error)
+	Get(k string, v any) error
 
 	// GetString get string cache data by key
 	GetString(k string) (s string, ok bool)

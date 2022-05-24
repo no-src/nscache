@@ -18,9 +18,9 @@ const (
 
 type redisCache struct {
 	conn       *url.URL
-	mu         sync.Mutex
-	client     *redis.Client
 	serializer encoding.Serializer
+	mu         sync.RWMutex
+	client     *redis.Client
 }
 
 func newCache(conn *url.URL) (nscache.NSCache, error) {
@@ -30,15 +30,15 @@ func newCache(conn *url.URL) (nscache.NSCache, error) {
 	}
 	c := &redisCache{
 		conn:       conn,
-		client:     redis.NewClient(opt),
 		serializer: encoding.DefaultSerializer,
+		client:     redis.NewClient(opt),
 	}
 	return c, nil
 }
 
-func (c *redisCache) Get(k string, v any) (err error) {
-	c.mu.Lock()
-	defer c.mu.Unlock()
+func (c *redisCache) Get(k string, v any) error {
+	c.mu.RLock()
+	defer c.mu.RUnlock()
 	data, err := c.client.Get(context.Background(), k).Bytes()
 	if err != nil && err != redis.Nil {
 		return err
@@ -49,13 +49,12 @@ func (c *redisCache) Get(k string, v any) (err error) {
 }
 
 func (c *redisCache) GetString(k string) (s string, ok bool) {
-	var v any
+	var v *string
 	err := c.Get(k, &v)
 	if err != nil || v == nil {
 		return "", false
 	}
-	s, ok = v.(string)
-	return s, ok
+	return *v, true
 }
 
 func (c *redisCache) Set(k string, v any, expiration time.Duration) error {
@@ -72,7 +71,7 @@ func (c *redisCache) Set(k string, v any, expiration time.Duration) error {
 // parseRedisConnection parse the redis connection string
 func parseRedisConnection(u *url.URL) (opt *redis.Options, err error) {
 	if u == nil {
-		return nil, errors.New("invalid redis url")
+		return nil, errors.New("invalid redis connection string")
 	}
 	return redis.ParseURL(u.String())
 }

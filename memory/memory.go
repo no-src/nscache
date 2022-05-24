@@ -15,9 +15,9 @@ const (
 
 type memoryCache struct {
 	conn       *url.URL
-	mu         sync.Mutex
-	data       map[string]*memoryData
 	serializer encoding.Serializer
+	mu         sync.RWMutex
+	data       map[string]*memoryData
 }
 
 type memoryData struct {
@@ -35,32 +35,30 @@ func newMemoryData(data []byte, expiration time.Duration) *memoryData {
 func newCache(conn *url.URL) (nscache.NSCache, error) {
 	c := &memoryCache{
 		conn:       conn,
-		data:       make(map[string]*memoryData),
 		serializer: encoding.DefaultSerializer,
+		data:       make(map[string]*memoryData),
 	}
 	return c, nil
 }
 
-func (c *memoryCache) Get(k string, v any) (err error) {
-	c.mu.Lock()
-	defer c.mu.Unlock()
+func (c *memoryCache) Get(k string, v any) error {
+	c.mu.RLock()
+	defer c.mu.RUnlock()
 	md := c.data[k]
 	if md == nil || md.expireTime.Before(time.Now()) {
 		delete(c.data, k)
 		return nil
 	}
-	err = c.serializer.Deserialize(md.data, &v)
-	return err
+	return c.serializer.Deserialize(md.data, &v)
 }
 
 func (c *memoryCache) GetString(k string) (s string, ok bool) {
-	var v any
+	var v *string
 	err := c.Get(k, &v)
 	if err != nil || v == nil {
 		return "", false
 	}
-	s, ok = v.(string)
-	return s, ok
+	return *v, true
 }
 
 func (c *memoryCache) Set(k string, v any, expiration time.Duration) error {
