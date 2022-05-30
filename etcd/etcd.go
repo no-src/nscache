@@ -9,6 +9,7 @@ import (
 
 	"github.com/no-src/nscache"
 	"github.com/no-src/nscache/encoding"
+	"github.com/no-src/nscache/extension"
 	clientv3 "go.etcd.io/etcd/client/v3"
 )
 
@@ -17,6 +18,8 @@ const (
 )
 
 type etcdCache struct {
+	nscache.NSCacheExt
+
 	conn       *url.URL
 	serializer encoding.Serializer
 	mu         sync.RWMutex
@@ -37,6 +40,7 @@ func newCache(conn *url.URL) (nscache.NSCache, error) {
 		serializer: encoding.DefaultSerializer,
 		client:     client,
 	}
+	c.NSCacheExt = extension.New(c)
 	return c, nil
 }
 
@@ -52,15 +56,6 @@ func (c *etcdCache) Get(k string, v any) error {
 	}
 	data := resp.Kvs[0].Value
 	return c.serializer.Deserialize(data, &v)
-}
-
-func (c *etcdCache) GetString(k string) (s string, ok bool) {
-	var v *string
-	err := c.Get(k, &v)
-	if err != nil || v == nil {
-		return "", false
-	}
-	return *v, true
 }
 
 func (c *etcdCache) Set(k string, v any, expiration time.Duration) error {

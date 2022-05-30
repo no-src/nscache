@@ -10,6 +10,7 @@ import (
 	"github.com/go-redis/redis/v8"
 	"github.com/no-src/nscache"
 	"github.com/no-src/nscache/encoding"
+	"github.com/no-src/nscache/extension"
 )
 
 const (
@@ -17,6 +18,8 @@ const (
 )
 
 type redisCache struct {
+	nscache.NSCacheExt
+
 	conn       *url.URL
 	serializer encoding.Serializer
 	mu         sync.RWMutex
@@ -33,6 +36,7 @@ func newCache(conn *url.URL) (nscache.NSCache, error) {
 		serializer: encoding.DefaultSerializer,
 		client:     redis.NewClient(opt),
 	}
+	c.NSCacheExt = extension.New(c)
 	return c, nil
 }
 
@@ -46,15 +50,6 @@ func (c *redisCache) Get(k string, v any) error {
 		return nil
 	}
 	return c.serializer.Deserialize(data, &v)
-}
-
-func (c *redisCache) GetString(k string) (s string, ok bool) {
-	var v *string
-	err := c.Get(k, &v)
-	if err != nil || v == nil {
-		return "", false
-	}
-	return *v, true
 }
 
 func (c *redisCache) Set(k string, v any, expiration time.Duration) error {

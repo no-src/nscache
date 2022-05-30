@@ -9,11 +9,10 @@ import (
 
 // NSCache the core interface of the cache
 type NSCache interface {
+	NSCacheExt
+
 	// Get get cache data by key
 	Get(k string, v any) error
-
-	// GetString get string cache data by key
-	GetString(k string) (s string, ok bool)
 
 	// Set set new cache data
 	Set(k string, v any, expiration time.Duration) error

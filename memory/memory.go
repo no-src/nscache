@@ -7,6 +7,7 @@ import (
 
 	"github.com/no-src/nscache"
 	"github.com/no-src/nscache/encoding"
+	"github.com/no-src/nscache/extension"
 )
 
 const (
@@ -14,6 +15,8 @@ const (
 )
 
 type memoryCache struct {
+	nscache.NSCacheExt
+
 	conn       *url.URL
 	serializer encoding.Serializer
 	mu         sync.RWMutex
@@ -38,6 +41,7 @@ func newCache(conn *url.URL) (nscache.NSCache, error) {
 		serializer: encoding.DefaultSerializer,
 		data:       make(map[string]*memoryData),
 	}
+	c.NSCacheExt = extension.New(c)
 	return c, nil
 }
 
@@ -50,15 +54,6 @@ func (c *memoryCache) Get(k string, v any) error {
 		return nil
 	}
 	return c.serializer.Deserialize(md.data, &v)
-}
-
-func (c *memoryCache) GetString(k string) (s string, ok bool) {
-	var v *string
-	err := c.Get(k, &v)
-	if err != nil || v == nil {
-		return "", false
-	}
-	return *v, true
 }
 
 func (c *memoryCache) Set(k string, v any, expiration time.Duration) error {

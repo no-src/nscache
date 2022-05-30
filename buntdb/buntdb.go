@@ -8,6 +8,7 @@ import (
 
 	"github.com/no-src/nscache"
 	"github.com/no-src/nscache/encoding"
+	"github.com/no-src/nscache/extension"
 	"github.com/tidwall/buntdb"
 )
 
@@ -16,6 +17,8 @@ const (
 )
 
 type buntDBCache struct {
+	nscache.NSCacheExt
+
 	conn       *url.URL
 	serializer encoding.Serializer
 	mu         sync.RWMutex
@@ -36,6 +39,7 @@ func newCache(conn *url.URL) (nscache.NSCache, error) {
 		serializer: encoding.DefaultSerializer,
 		db:         db,
 	}
+	c.NSCacheExt = extension.New(c)
 	return c, nil
 }
 
@@ -56,15 +60,6 @@ func (c *buntDBCache) Get(k string, v any) error {
 		return err
 	}
 	return c.serializer.Deserialize(data, &v)
-}
-
-func (c *buntDBCache) GetString(k string) (s string, ok bool) {
-	var v *string
-	err := c.Get(k, &v)
-	if err != nil || v == nil {
-		return "", false
-	}
-	return *v, true
 }
 
 func (c *buntDBCache) Set(k string, v any, expiration time.Duration) error {
