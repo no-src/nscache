@@ -1,6 +1,8 @@
 package extension
 
 import (
+	"time"
+
 	"github.com/no-src/nscache"
 )
 
@@ -17,6 +19,10 @@ func New(cache nscache.NSCache) nscache.NSCacheExt {
 
 func (ext *extension) GetString(k string) (v string, ok bool) {
 	return getValue[string](k, ext.c.Get)
+}
+
+func (ext *extension) GetStringList(k string) (v []string, ok bool) {
+	return getValue[[]string](k, ext.c.Get)
 }
 
 func (ext *extension) GetBool(k string) (v bool, ok bool) {
@@ -49,6 +55,14 @@ func (ext *extension) GetComplex64(k string) (v complex64, ok bool) {
 
 func (ext *extension) GetComplex128(k string) (v complex128, ok bool) {
 	return getValue[complex128](k, ext.c.Get)
+}
+
+func (ext *extension) GetTime(k string) (v time.Time, ok bool) {
+	return getValue[time.Time](k, ext.c.Get)
+}
+
+func (ext *extension) GetDuration(k string) (v time.Duration, ok bool) {
+	return getValue[time.Duration](k, ext.c.Get)
 }
 
 func getValue[T any](k string, get func(k string, v any) error) (v T, ok bool) {
