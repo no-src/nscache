@@ -5,7 +5,7 @@ go 1.18
 require (
 	github.com/go-redis/redis/v8 v8.11.5
 	github.com/no-src/log v0.1.4
-	github.com/tidwall/buntdb v1.2.9
+	github.com/tidwall/buntdb v1.2.10
 	go.etcd.io/etcd/client/v3 v3.5.4
 )
 
@@ -16,8 +16,8 @@ require (
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
-	github.com/tidwall/btree v1.3.1 // indirect
-	github.com/tidwall/gjson v1.14.1 // indirect
+	github.com/tidwall/btree v1.4.2 // indirect
+	github.com/tidwall/gjson v1.14.3 // indirect
 	github.com/tidwall/grect v0.1.4 // indirect
 	github.com/tidwall/match v1.1.1 // indirect
 	github.com/tidwall/pretty v1.2.0 // indirect
