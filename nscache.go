@@ -25,7 +25,9 @@ func NewCache(conn string) (NSCache, error) {
 		return nil, err
 	}
 	driverName := strings.ToLower(u.Scheme)
+	mu.RLock()
 	factory := drivers[driverName]
+	mu.RUnlock()
 	if factory == nil {
 		return nil, fmt.Errorf("find unsupported cache driver => %s", driverName)
 	}
