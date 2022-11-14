@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/no-src/nscache"
+	"github.com/no-src/nscache/internal/testutil"
 )
 
 var (
@@ -57,10 +58,10 @@ func TestRedisCache_GetString_NotExpectedValue(t *testing.T) {
 func TestRedisCache_Get(t *testing.T) {
 	testCases := []struct {
 		k string
-		v Account
+		v testutil.Account
 	}{
-		{"account_1", Account{UserName: "admin", Password: "admin_pwd", IsValid: true}},
-		{"account_empty", Account{}},
+		{"account_1", testutil.Account{UserName: "admin", Password: "admin_pwd", IsValid: true}},
+		{"account_empty", testutil.Account{}},
 	}
 
 	c, _ := nscache.NewCache(connectionString)
@@ -71,11 +72,11 @@ func TestRedisCache_Get(t *testing.T) {
 				t.Errorf("TestMemoryCache_Get error k=%v v=%v, err=%s", tc.k, tc.v, err)
 				return
 			}
-			var actual *Account
+			var actual *testutil.Account
 			err = c.Get(tc.k, &actual)
 			if err != nil {
 				t.Errorf("TestMemoryCache_Get error k=%v v=%v, err=%s", tc.k, tc.v, err)
-			} else if !tc.v.equal(actual) {
+			} else if !tc.v.Equal(actual) {
 				t.Errorf("k=%v v=%v, expect:%v, but actual:%v", tc.k, tc.v, tc.v, actual)
 			}
 		})
@@ -85,10 +86,10 @@ func TestRedisCache_Get(t *testing.T) {
 func TestRedisCache_Get_Point(t *testing.T) {
 	testCases := []struct {
 		k string
-		v *Account
+		v *testutil.Account
 	}{
-		{"account_1", &Account{UserName: "admin", Password: "admin_pwd", IsValid: true}},
-		{"account_empty", &Account{}},
+		{"account_1", &testutil.Account{UserName: "admin", Password: "admin_pwd", IsValid: true}},
+		{"account_empty", &testutil.Account{}},
 		{"account_nil", nil},
 	}
 
@@ -100,26 +101,13 @@ func TestRedisCache_Get_Point(t *testing.T) {
 				t.Errorf("TestMemoryCache_Get error k=%v v=%v, err=%s", tc.k, tc.v, err)
 				return
 			}
-			var actual *Account
+			var actual *testutil.Account
 			err = c.Get(tc.k, &actual)
 			if err != nil {
 				t.Errorf("TestMemoryCache_Get error k=%v v=%v, err=%s", tc.k, tc.v, err)
-			} else if !tc.v.equal(actual) {
+			} else if !tc.v.Equal(actual) {
 				t.Errorf("k=%v v=%v, expect:%v, but actual:%v", tc.k, tc.v, tc.v, actual)
 			}
 		})
 	}
-}
-
-type Account struct {
-	UserName string
-	Password string
-	IsValid  bool
-}
-
-func (a *Account) equal(account *Account) bool {
-	if a == nil || account == nil {
-		return a == account
-	}
-	return a.UserName == account.UserName && a.Password == account.Password && a.IsValid == account.IsValid
 }
