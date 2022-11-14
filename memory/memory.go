@@ -47,10 +47,13 @@ func newCache(conn *url.URL) (nscache.NSCache, error) {
 
 func (c *memoryCache) Get(k string, v any) error {
 	c.mu.RLock()
-	defer c.mu.RUnlock()
 	md := c.data[k]
-	if md == nil || md.expireTime.Before(time.Now()) {
-		delete(c.data, k)
+	c.mu.RUnlock()
+	if md == nil {
+		return nil
+	}
+	if md.expireTime.Before(time.Now()) {
+		go c.remove(k)
 		return nil
 	}
 	return c.serializer.Deserialize(md.data, &v)
@@ -65,6 +68,12 @@ func (c *memoryCache) Set(k string, v any, expiration time.Duration) error {
 	}
 	c.data[k] = newMemoryData(data, expiration)
 	return nil
+}
+
+func (c *memoryCache) remove(k string) {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	delete(c.data, k)
 }
 
 func init() {
