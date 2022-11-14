@@ -30,21 +30,21 @@ func TestRegister_WithRepeatedCacheFactory(t *testing.T) {
 }
 
 func TestRegister_WithConcurrent(t *testing.T) {
-	var stop atomic.Bool
+	var stop int32
 	go func() {
-		for !stop.Load() {
+		for atomic.LoadInt32(&stop) == 0 {
 			Register("concurrent_cache_factory", mockFactory)
 		}
 	}()
 
 	go func() {
-		for !stop.Load() {
+		for atomic.LoadInt32(&stop) == 0 {
 			Register("concurrent_cache_factory", mockFactory)
 		}
 	}()
 
 	<-time.After(time.Second * 3)
-	stop.Store(true)
+	atomic.StoreInt32(&stop, 1)
 }
 
 var mockFactory = func(conn *url.URL) (NSCache, error) {
