@@ -15,11 +15,16 @@ var (
 type CacheFactoryFunc func(conn *url.URL) (NSCache, error)
 
 // Register register a new cache driver
-func Register(name string, factory CacheFactoryFunc) {
+func Register(name string, factory CacheFactoryFunc) (overwritten bool) {
+	if factory == nil {
+		panic("the cache driver factory can't be nil")
+	}
 	name = strings.ToLower(name)
 	if _, exist := drivers[name]; exist {
 		log.Debug("the cache driver [%s] already existed", name)
+		overwritten = true
 	}
 	drivers[name] = factory
 	log.Debug("the cache driver [%s] is registered", name)
+	return overwritten
 }
