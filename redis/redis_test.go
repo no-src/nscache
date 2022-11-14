@@ -9,8 +9,8 @@ import (
 )
 
 var (
-	connectionString = "redis://127.0.0.1:6379"
-	expiration       = time.Minute
+	connectionString = testutil.RedisConnectionString
+	expiration       = testutil.DefaultExpiration
 )
 
 func TestRedisCache_GetString(t *testing.T) {
@@ -83,7 +83,7 @@ func TestRedisCache_Get(t *testing.T) {
 	}
 }
 
-func TestRedisCache_Get_Point(t *testing.T) {
+func TestRedisCache_Get_Pointer(t *testing.T) {
 	testCases := []struct {
 		k string
 		v *testutil.Account
@@ -98,13 +98,13 @@ func TestRedisCache_Get_Point(t *testing.T) {
 		t.Run(tc.k, func(t *testing.T) {
 			err := c.Set(tc.k, tc.v, expiration)
 			if err != nil {
-				t.Errorf("TestMemoryCache_Get error k=%v v=%v, err=%s", tc.k, tc.v, err)
+				t.Errorf("TestRedisCache_Get_Pointer error k=%v v=%v, err=%s", tc.k, tc.v, err)
 				return
 			}
 			var actual *testutil.Account
 			err = c.Get(tc.k, &actual)
 			if err != nil {
-				t.Errorf("TestMemoryCache_Get error k=%v v=%v, err=%s", tc.k, tc.v, err)
+				t.Errorf("TestRedisCache_Get_Pointer error k=%v v=%v, err=%s", tc.k, tc.v, err)
 			} else if !tc.v.Equal(actual) {
 				t.Errorf("k=%v v=%v, expect:%v, but actual:%v", tc.k, tc.v, tc.v, actual)
 			}
