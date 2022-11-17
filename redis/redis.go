@@ -44,10 +44,11 @@ func (c *redisCache) Get(k string, v any) error {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	data, err := c.client.Get(context.Background(), k).Bytes()
-	if err != nil && err != redis.Nil {
+	if err == redis.Nil {
+		err = nscache.ErrNil
+	}
+	if err != nil {
 		return err
-	} else if err == redis.Nil {
-		return nscache.ErrNil
 	}
 	return c.serializer.Deserialize(data, &v)
 }

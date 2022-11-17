@@ -55,8 +55,9 @@ func (c *buntDBCache) Get(k string, v any) error {
 		return getErr
 	})
 	if err == buntdb.ErrNotFound {
-		return nscache.ErrNil
-	} else if err != nil {
+		err = nscache.ErrNil
+	}
+	if err != nil {
 		return err
 	}
 	return c.serializer.Deserialize(data, &v)

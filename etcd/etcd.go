@@ -49,14 +49,14 @@ func (c *etcdCache) Get(k string, v any) error {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	resp, err := c.client.Get(context.Background(), k)
-	if err != nil {
-		return err
+	if err == nil {
+		if resp.Count == 0 {
+			return nscache.ErrNil
+		}
+		data := resp.Kvs[0].Value
+		err = c.serializer.Deserialize(data, &v)
 	}
-	if resp.Count == 0 {
-		return nscache.ErrNil
-	}
-	data := resp.Kvs[0].Value
-	return c.serializer.Deserialize(data, &v)
+	return err
 }
 
 func (c *etcdCache) Set(k string, v any, expiration time.Duration) error {
@@ -69,10 +69,9 @@ func (c *etcdCache) Set(k string, v any, expiration time.Duration) error {
 	lease := clientv3.NewLease(c.client)
 	ctx := context.Background()
 	lgr, err := lease.Grant(ctx, int64(expiration.Seconds()))
-	if err != nil {
-		return err
+	if err == nil {
+		_, err = c.client.Put(ctx, k, string(data), clientv3.WithLease(lgr.ID))
 	}
-	_, err = c.client.Put(ctx, k, string(data), clientv3.WithLease(lgr.ID))
 	return err
 }
 
