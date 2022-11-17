@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"net/url"
+	"strconv"
 	"sync"
 	"time"
 
@@ -89,6 +90,22 @@ func parseEtcdConnection(u *url.URL) (c clientv3.Config, err error) {
 			return c, err
 		}
 		c.DialTimeout = dialTimeout
+	}
+	maxCallSendMsgSizeValue := u.Query().Get("max_call_send_msg_size")
+	if len(maxCallSendMsgSizeValue) > 0 {
+		maxCallSendMsgSize, err := strconv.Atoi(maxCallSendMsgSizeValue)
+		if err != nil {
+			return c, err
+		}
+		c.MaxCallSendMsgSize = maxCallSendMsgSize
+	}
+	maxCallRecvMsgSizeValue := u.Query().Get("max_call_recv_msg_size")
+	if len(maxCallRecvMsgSizeValue) > 0 {
+		maxCallRecvMsgSize, err := strconv.Atoi(maxCallRecvMsgSizeValue)
+		if err != nil {
+			return c, err
+		}
+		c.MaxCallRecvMsgSize = maxCallRecvMsgSize
 	}
 	return c, nil
 }
