@@ -55,7 +55,7 @@ func (c *buntDBCache) Get(k string, v any) error {
 		return getErr
 	})
 	if err == buntdb.ErrNotFound {
-		return nil
+		return nscache.ErrNil
 	} else if err != nil {
 		return err
 	}

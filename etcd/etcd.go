@@ -52,7 +52,7 @@ func (c *etcdCache) Get(k string, v any) error {
 		return err
 	}
 	if resp.Count == 0 {
-		return nil
+		return nscache.ErrNil
 	}
 	data := resp.Kvs[0].Value
 	return c.serializer.Deserialize(data, &v)

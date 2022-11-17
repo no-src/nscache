@@ -1,11 +1,15 @@
 package nscache
 
 import (
+	"errors"
 	"fmt"
 	"net/url"
 	"strings"
 	"time"
 )
+
+// ErrNil get nil data
+var ErrNil = errors.New("nscache: nil")
 
 // NSCache the core interface of the cache
 type NSCache interface {

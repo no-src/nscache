@@ -47,7 +47,7 @@ func (c *redisCache) Get(k string, v any) error {
 	if err != nil && err != redis.Nil {
 		return err
 	} else if err == redis.Nil {
-		return nil
+		return nscache.ErrNil
 	}
 	return c.serializer.Deserialize(data, &v)
 }

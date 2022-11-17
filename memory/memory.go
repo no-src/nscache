@@ -50,11 +50,11 @@ func (c *memoryCache) Get(k string, v any) error {
 	md := c.data[k]
 	c.mu.RUnlock()
 	if md == nil {
-		return nil
+		return nscache.ErrNil
 	}
 	if md.expireTime.Before(time.Now()) {
 		go c.remove(k)
-		return nil
+		return nscache.ErrNil
 	}
 	return c.serializer.Deserialize(md.data, &v)
 }
