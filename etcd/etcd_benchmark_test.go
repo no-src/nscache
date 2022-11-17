@@ -3,25 +3,13 @@ package etcd
 import (
 	"testing"
 
-	"github.com/no-src/nscache"
+	"github.com/no-src/nscache/internal/testutil"
 )
 
 func BenchmarkEtcdCache_Get(b *testing.B) {
-	c, _ := nscache.NewCache(connectionString)
-	c.Set("hello", "world", expiration)
-	b.ResetTimer()
-	b.ReportAllocs()
-	for i := 0; i < b.N; i++ {
-		var v string
-		c.Get("hello", &v)
-	}
+	testutil.BenchmarkCacheGet(b, connectionString, expiration)
 }
 
 func BenchmarkEtcdCache_Set(b *testing.B) {
-	c, _ := nscache.NewCache(connectionString)
-	b.ResetTimer()
-	b.ReportAllocs()
-	for i := 0; i < b.N; i++ {
-		c.Set("hello", "world", expiration)
-	}
+	testutil.BenchmarkCacheSet(b, connectionString, expiration)
 }

@@ -92,3 +92,33 @@ func testCacheReturnError(t *testing.T, c nscache.NSCache, expiration time.Durat
 		t.Errorf("Set: expect to get an error but get nil")
 	}
 }
+
+// BenchmarkCacheGet the benchmark test of get cache data
+func BenchmarkCacheGet(b *testing.B, conn string, expiration time.Duration) {
+	c, err := nscache.NewCache(conn)
+	if err != nil {
+		b.Errorf("init cache error, err=%v", err)
+		return
+	}
+	c.Set("hello", "world", expiration)
+	b.ResetTimer()
+	b.ReportAllocs()
+	for i := 0; i < b.N; i++ {
+		var v string
+		c.Get("hello", &v)
+	}
+}
+
+// BenchmarkCacheSet the benchmark test of set cache data
+func BenchmarkCacheSet(b *testing.B, conn string, expiration time.Duration) {
+	c, err := nscache.NewCache(conn)
+	if err != nil {
+		b.Errorf("init cache error, err=%v", err)
+		return
+	}
+	b.ResetTimer()
+	b.ReportAllocs()
+	for i := 0; i < b.N; i++ {
+		c.Set("hello", "world", expiration)
+	}
+}

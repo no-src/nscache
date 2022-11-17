@@ -3,7 +3,7 @@ package etcd
 import (
 	"net/url"
 	"testing"
-	
+
 	"github.com/no-src/nscache/internal/testutil"
 )
 
