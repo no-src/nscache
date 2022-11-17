@@ -61,14 +61,6 @@ func (ext *extension) GetFloat64(k string) (v float64, ok bool) {
 	return getValue[float64](k, ext.c.Get)
 }
 
-func (ext *extension) GetComplex64(k string) (v complex64, ok bool) {
-	return getValue[complex64](k, ext.c.Get)
-}
-
-func (ext *extension) GetComplex128(k string) (v complex128, ok bool) {
-	return getValue[complex128](k, ext.c.Get)
-}
-
 func (ext *extension) GetString(k string) (v string, ok bool) {
 	return getValue[string](k, ext.c.Get)
 }

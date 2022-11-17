@@ -26,10 +26,6 @@ type NSCacheExt interface {
 	GetFloat32(k string) (v float32, ok bool)
 	// GetFloat64 get float64 cache data by key
 	GetFloat64(k string) (v float64, ok bool)
-	// GetComplex64 get complex64 cache data by key
-	GetComplex64(k string) (v complex64, ok bool)
-	// GetComplex128 get complex128 cache data by key
-	GetComplex128(k string) (v complex128, ok bool)
 	// GetString get string cache data by key
 	GetString(k string) (v string, ok bool)
 	// GetStrings get string list cache data by key
