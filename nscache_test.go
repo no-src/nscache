@@ -3,8 +3,6 @@ package nscache
 import (
 	"errors"
 	"testing"
-
-	"github.com/no-src/nscache/internal/testutil"
 )
 
 func TestNewCache(t *testing.T) {
@@ -45,10 +43,7 @@ func TestNewCache_Unsupported(t *testing.T) {
 	testCases := []struct {
 		conn string
 	}{
-		{testutil.MemoryConnectionString},
-		{testutil.BuntDBConnectionString},
-		{testutil.EtcdConnectionString},
-		{testutil.RedisConnectionString},
+		{"unsupported:"},
 	}
 	for _, tc := range testCases {
 		t.Run(tc.conn, func(t *testing.T) {
