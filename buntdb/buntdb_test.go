@@ -27,7 +27,8 @@ func TestBuntDBCache_NewCache_WithInvalidURL(t *testing.T) {
 	testCases := []struct {
 		conn string
 	}{
-		{"buntdb://:invalid:"},
+		{"buntdb:///invalid"},
+		{"buntdb://"},
 	}
 	for _, tc := range testCases {
 		t.Run(tc.conn, func(t *testing.T) {
