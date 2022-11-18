@@ -2,7 +2,7 @@ package buntdb
 
 import (
 	"testing"
-	
+
 	"github.com/no-src/nscache/internal/testutil"
 )
 
