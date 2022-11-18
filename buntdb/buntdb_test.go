@@ -16,14 +16,14 @@ func TestBuntDBCache(t *testing.T) {
 	testutil.TestCache(t, connectionString, expiration)
 }
 
-func TestNewCache_WithNilURL(t *testing.T) {
+func TestBuntDBCache_NewCache_WithNilURL(t *testing.T) {
 	_, err := newCache(nil)
 	if err == nil {
 		t.Errorf("expect get an error, but get nil")
 	}
 }
 
-func TestNewCache_WithInvalidURL(t *testing.T) {
+func TestBuntDBCache_NewCache_WithInvalidURL(t *testing.T) {
 	testCases := []struct {
 		conn string
 	}{
