@@ -53,12 +53,13 @@ func (ms MyStruct) equal(target MyStruct) bool {
 }
 
 func getMyStructCase() MyStruct {
+	t, _ := time.Parse(time.RFC3339, "2022-11-25T05:06:07Z")
 	return MyStruct{
 		Name:       "go",
 		ID:         1,
 		IsValid:    true,
-		CreateTime: time.Unix(1669323967, 0),
+		CreateTime: t,
 		Expires:    time.Minute * 3,
-		jsonData:   `{"name":"go","id":1,"is_valid":true,"create_time":"2022-11-25T05:06:07+08:00","expires":180000000000}`,
+		jsonData:   `{"name":"go","id":1,"is_valid":true,"create_time":"2022-11-25T05:06:07Z","expires":180000000000}`,
 	}
 }
