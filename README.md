@@ -15,12 +15,17 @@ go get -u github.com/no-src/nscache
 
 ## Quick Start
 
-Current support following cache
+First, you need to import the cache driver, then create your cache component instance with the specified connection
+string and use it.
 
-- memory `memory:`
-- redis `redis://127.0.0.1:6379`
-- buntdb `buntdb://:memory:` or `buntdb://buntdb.db`
-- etcd `etcd://127.0.0.1:2379?dial_timeout=5s`
+Current support following cache drivers
+
+| Driver | Import Driver Package              | Connection String Example                   |
+|--------|------------------------------------|---------------------------------------------|
+| Memory | `github.com/no-src/nscache/memory` | `memory:`                                   |
+| Redis  | `github.com/no-src/nscache/redis`  | `redis://127.0.0.1:6379`                    |
+| BuntDB | `github.com/no-src/nscache/buntdb` | `buntdb://:memory:` or `buntdb://buntdb.db` |
+| Etcd   | `github.com/no-src/nscache/etcd`   | `etcd://127.0.0.1:2379?dial_timeout=5s`     |
 
 For example, init a memory cache, write and read data.
 
@@ -30,9 +35,10 @@ package main
 import (
 	"time"
 
+	_ "github.com/no-src/nscache/memory"
+
 	"github.com/no-src/log"
 	"github.com/no-src/nscache"
-	_ "github.com/no-src/nscache/memory"
 )
 
 func main() {
