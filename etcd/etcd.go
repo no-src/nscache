@@ -75,6 +75,13 @@ func (c *etcdCache) Set(k string, v any, expiration time.Duration) error {
 	return err
 }
 
+func (c *etcdCache) Remove(k string) error {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	_, err := c.client.Delete(context.Background(), k)
+	return err
+}
+
 // parseEtcdConnection parse the etcd connection string
 func parseEtcdConnection(u *url.URL) (c clientv3.Config, err error) {
 	if u == nil {

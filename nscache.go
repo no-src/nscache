@@ -20,6 +20,9 @@ type NSCache interface {
 
 	// Set set new cache data
 	Set(k string, v any, expiration time.Duration) error
+
+	// Remove remove the specified key
+	Remove(k string) error
 }
 
 // NewCache get an instance of NSCache by connection string

@@ -53,7 +53,7 @@ func (c *memoryCache) Get(k string, v any) error {
 		return nscache.ErrNil
 	}
 	if md.expireTime.Before(time.Now()) {
-		go c.remove(k)
+		go c.Remove(k)
 		return nscache.ErrNil
 	}
 	return c.serializer.Deserialize(md.data, &v)
@@ -70,10 +70,11 @@ func (c *memoryCache) Set(k string, v any, expiration time.Duration) error {
 	return nil
 }
 
-func (c *memoryCache) remove(k string) {
+func (c *memoryCache) Remove(k string) error {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 	delete(c.data, k)
+	return nil
 }
 
 func init() {

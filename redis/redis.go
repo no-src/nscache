@@ -64,6 +64,12 @@ func (c *redisCache) Set(k string, v any, expiration time.Duration) error {
 	return stat.Err()
 }
 
+func (c *redisCache) Remove(k string) error {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	return c.client.Del(context.Background(), k).Err()
+}
+
 // parseRedisConnection parse the redis connection string
 func parseRedisConnection(u *url.URL) (opt *redis.Options, err error) {
 	if u == nil {

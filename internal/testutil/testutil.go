@@ -42,13 +42,17 @@ func TestCache(t *testing.T, conn string, expiration time.Duration) {
 
 	for _, tc := range testCases {
 		t.Run(tc.k, func(t *testing.T) {
+			// remove the key to ensure the key does not exist
+			err = c.Remove(tc.k)
+			if err != nil {
+				t.Errorf("Remove: get an error, k=%v v=%v, err=%v", tc.k, tc.v, err)
+				return
+			}
+
 			var actual *testStruct
 			// get data before set
 			err = c.Get(tc.k, &actual)
-			if err == nil {
-				t.Errorf("Get: expect to get error => %v, but get nil, k=%v", nscache.ErrNil, tc.k)
-				return
-			} else if !errors.Is(err, nscache.ErrNil) {
+			if !errors.Is(err, nscache.ErrNil) {
 				t.Errorf("Get: expect to get error => %v, but get %v, k=%v", nscache.ErrNil, err, tc.k)
 				return
 			}
@@ -73,10 +77,28 @@ func TestCache(t *testing.T, conn string, expiration time.Duration) {
 			// get data after data is expired
 			<-time.After(expiration + time.Second*2)
 			err = c.Get(tc.k, &actual)
-			if err == nil {
-				t.Errorf("Get: expect to get error => %v, but get nil, k=%v", nscache.ErrNil, tc.k)
+			if !errors.Is(err, nscache.ErrNil) {
+				t.Errorf("Get: expect to get error => %v, but get %v, k=%v", nscache.ErrNil, err, tc.k)
 				return
-			} else if !errors.Is(err, nscache.ErrNil) {
+			}
+
+			// set data with long expiration time
+			err = c.Set(tc.k, tc.v, expiration*10)
+			if err != nil {
+				t.Errorf("Set: get an error, k=%v v=%v, err=%v", tc.k, tc.v, err)
+				return
+			}
+
+			// remove the key
+			err = c.Remove(tc.k)
+			if err != nil {
+				t.Errorf("Remove: get an error, k=%v v=%v, err=%v", tc.k, tc.v, err)
+				return
+			}
+
+			// get data after the key is removed
+			err = c.Get(tc.k, &actual)
+			if !errors.Is(err, nscache.ErrNil) {
 				t.Errorf("Get: expect to get error => %v, but get %v, k=%v", nscache.ErrNil, err, tc.k)
 				return
 			}
@@ -105,7 +127,10 @@ func BenchmarkCacheGet(b *testing.B, conn string, expiration time.Duration) {
 	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
 		var v string
-		c.Get("hello", &v)
+		if err = c.Get("hello", &v); err != nil {
+			b.Errorf("Get: get data error, err=%v", err)
+			return
+		}
 	}
 }
 
@@ -119,6 +144,27 @@ func BenchmarkCacheSet(b *testing.B, conn string, expiration time.Duration) {
 	b.ResetTimer()
 	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
-		c.Set("hello", "world", expiration)
+		if err = c.Set("hello", "world", expiration); err != nil {
+			b.Errorf("Set: set data error, err=%v", err)
+			return
+		}
+	}
+}
+
+// BenchmarkCacheRemove the benchmark test of remove cache data
+func BenchmarkCacheRemove(b *testing.B, conn string, expiration time.Duration) {
+	c, err := nscache.NewCache(conn)
+	if err != nil {
+		b.Errorf("init cache error, err=%v", err)
+		return
+	}
+	c.Set("hello", "world", expiration)
+	b.ResetTimer()
+	b.ReportAllocs()
+	for i := 0; i < b.N; i++ {
+		if err = c.Remove("hello"); err != nil {
+			b.Errorf("Remove: remove data error, err=%v", err)
+			return
+		}
 	}
 }

@@ -76,6 +76,18 @@ func (c *buntDBCache) Set(k string, v any, expiration time.Duration) error {
 	})
 }
 
+func (c *buntDBCache) Remove(k string) error {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	return c.db.Update(func(tx *buntdb.Tx) error {
+		_, err := tx.Delete(k)
+		if errors.Is(err, buntdb.ErrNotFound) {
+			return nil
+		}
+		return err
+	})
+}
+
 // parseBuntDBConnection parse the buntdb connection string
 func parseBuntDBConnection(u *url.URL) (path string, err error) {
 	if u == nil {

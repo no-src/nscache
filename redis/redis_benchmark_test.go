@@ -13,3 +13,7 @@ func BenchmarkRedisCache_Get(b *testing.B) {
 func BenchmarkRedisCache_Set(b *testing.B) {
 	testutil.BenchmarkCacheSet(b, connectionString, expiration)
 }
+
+func BenchmarkRedisCache_Remove(b *testing.B) {
+	testutil.BenchmarkCacheRemove(b, connectionString, expiration)
+}
