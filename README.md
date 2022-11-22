@@ -27,7 +27,7 @@ Current support following cache drivers
 | BuntDB | `github.com/no-src/nscache/buntdb` | `buntdb://:memory:` or `buntdb://buntdb.db` |
 | Etcd   | `github.com/no-src/nscache/etcd`   | `etcd://127.0.0.1:2379?dial_timeout=5s`     |
 
-For example, init a memory cache, write and read data.
+For example, initial a memory cache and write, read and remove data.
 
 ```go
 package main
@@ -42,18 +42,29 @@ import (
 )
 
 func main() {
+	// initial cache driver
 	c, err := nscache.NewCache("memory:")
 	if err != nil {
 		log.Error(err, "init cache error")
 		return
 	}
+
+	// write data
 	k := "hello"
 	c.Set(k, "world", time.Minute)
+
+	// read data
 	var v string
 	if err = c.Get(k, &v); err != nil {
 		log.Error(err, "get cache error")
 		return
 	}
 	log.Info("key=%s value=%s", k, v)
+
+	// remove data
+	if err = c.Remove(k); err != nil {
+		log.Error(err, "remove cache error")
+		return
+	}
 }
 ```
