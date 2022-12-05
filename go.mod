@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/go-redis/redis/v8 v8.11.5
-	github.com/no-src/log v0.1.8
+	github.com/no-src/log v0.1.9
 	github.com/tidwall/buntdb v1.2.10
 	go.etcd.io/etcd/client/v3 v3.5.6
 )
