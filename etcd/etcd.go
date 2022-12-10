@@ -15,7 +15,8 @@ import (
 )
 
 const (
-	driverName = "etcd"
+	// DriverName the unique name of the Etcd driver for register
+	DriverName = "etcd"
 )
 
 type etcdCache struct {
@@ -117,5 +118,5 @@ func parseEtcdConnection(u *url.URL) (c clientv3.Config, err error) {
 }
 
 func init() {
-	nscache.Register(driverName, newCache)
+	nscache.Register(DriverName, newCache)
 }

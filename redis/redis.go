@@ -14,7 +14,8 @@ import (
 )
 
 const (
-	driverName = "redis"
+	// DriverName the unique name of the Redis driver for register
+	DriverName = "redis"
 )
 
 type redisCache struct {
@@ -79,5 +80,5 @@ func parseRedisConnection(u *url.URL) (opt *redis.Options, err error) {
 }
 
 func init() {
-	nscache.Register(driverName, newCache)
+	nscache.Register(DriverName, newCache)
 }
