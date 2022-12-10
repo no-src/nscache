@@ -11,7 +11,8 @@ import (
 )
 
 const (
-	driverName = "memory"
+	// DriverName the unique name of the memory driver for register
+	DriverName = "memory"
 )
 
 type memoryCache struct {
@@ -78,5 +79,5 @@ func (c *memoryCache) Remove(k string) error {
 }
 
 func init() {
-	nscache.Register(driverName, newCache)
+	nscache.Register(DriverName, newCache)
 }

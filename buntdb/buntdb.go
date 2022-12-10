@@ -13,7 +13,8 @@ import (
 )
 
 const (
-	driverName = "buntdb"
+	// DriverName the unique name of the BuntDB driver for register
+	DriverName = "buntdb"
 )
 
 type buntDBCache struct {
@@ -98,5 +99,5 @@ func parseBuntDBConnection(u *url.URL) (path string, err error) {
 }
 
 func init() {
-	nscache.Register(driverName, newCache)
+	nscache.Register(DriverName, newCache)
 }
