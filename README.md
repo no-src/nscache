@@ -1,6 +1,6 @@
 # nscache
 
-[![Build](https://img.shields.io/github/workflow/status/no-src/nscache/Go)](https://github.com/no-src/nscache/actions)
+[![Build](https://img.shields.io/github/actions/workflow/status/no-src/nscache/go.yml?branch=main)](https://github.com/no-src/nscache/actions)
 [![License](https://img.shields.io/github/license/no-src/nscache)](https://github.com/no-src/nscache/blob/main/LICENSE)
 [![Go Reference](https://pkg.go.dev/badge/github.com/no-src/nscache.svg)](https://pkg.go.dev/github.com/no-src/nscache)
 [![Go Report Card](https://goreportcard.com/badge/github.com/no-src/nscache)](https://goreportcard.com/report/github.com/no-src/nscache)
