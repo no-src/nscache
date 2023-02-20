@@ -60,8 +60,8 @@ github.com/google/uuid v1.1.2/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+
 github.com/grpc-ecosystem/grpc-gateway v1.16.0/go.mod h1:BDjrQk3hbvj6Nolgz8mAMFbcEtjT1g+wF4CSlocrBnw=
 github.com/kisielk/errcheck v1.5.0/go.mod h1:pFxgyoBC7bSaBwPgfKdkLd5X25qrDl4LWUI2bnpBCr8=
 github.com/kisielk/gotool v1.0.0/go.mod h1:XhKaO+MFFWcvkIS/tQcRk01m1F5IRFswLeQ+oQHNcck=
-github.com/no-src/log v0.1.9 h1:u09i3FzhKwhjwI/S7j/nSXMcKIM9tA3O0Fm7LwJz4W0=
-github.com/no-src/log v0.1.9/go.mod h1:C58ahv0WdsBL3Yxi+v6wyUXzwqk7aEPN+/1ltOsdHXg=
+github.com/no-src/log v0.1.10 h1:Cffl4xILkfqZD8OxTrEjpjdDMt2jaGe4dMn707CdxoY=
+github.com/no-src/log v0.1.10/go.mod h1:C58ahv0WdsBL3Yxi+v6wyUXzwqk7aEPN+/1ltOsdHXg=
 github.com/nxadm/tail v1.4.8 h1:nPr65rt6Y5JFSKQO7qToXr7pePgD6Gwiw05lkbyAQTE=
 github.com/onsi/ginkgo v1.16.5 h1:8xi0RTUf59SOSfEtZMvwTvXYMzG4gV23XVHOZiXNtnE=
 github.com/onsi/gomega v1.18.1 h1:M1GfJqGRrBrrGGsbxzV5dqM2U2ApXefZCQpkukxYRLE=
