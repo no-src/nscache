@@ -7,10 +7,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/go-redis/redis/v8"
 	"github.com/no-src/nscache"
 	"github.com/no-src/nscache/encoding"
 	"github.com/no-src/nscache/extension"
+	"github.com/redis/go-redis/v9"
 )
 
 const (
