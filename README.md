@@ -6,6 +6,7 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/no-src/nscache)](https://goreportcard.com/report/github.com/no-src/nscache)
 [![codecov](https://codecov.io/gh/no-src/nscache/branch/main/graph/badge.svg?token=ol5hru7WCf)](https://codecov.io/gh/no-src/nscache)
 [![Release](https://img.shields.io/github/v/release/no-src/nscache)](https://github.com/no-src/nscache/releases)
+[![Mentioned in Awesome Go](https://awesome.re/mentioned-badge.svg)](https://github.com/avelino/awesome-go)
 
 ## Installation
 
