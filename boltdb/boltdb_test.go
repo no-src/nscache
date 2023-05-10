@@ -8,12 +8,14 @@ import (
 )
 
 var (
-	connectionString = testutil.BoltDBConnectionString
-	expiration       = testutil.DefaultExpiration
+	connectionString           = testutil.BoltDBConnectionString
+	connectionStringWithBucket = testutil.BoltDBConnectionString + "?bucket=my-bucket"
+	expiration                 = testutil.DefaultExpiration
 )
 
 func TestBoltDBCache(t *testing.T) {
 	testutil.TestCache(t, connectionString, expiration)
+	testutil.TestCache(t, connectionStringWithBucket, expiration)
 }
 
 func TestBoltDBCache_NewCache_WithNilURL(t *testing.T) {

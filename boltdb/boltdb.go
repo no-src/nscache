@@ -12,12 +12,13 @@ import (
 
 const (
 	// DriverName the unique name of the boltdb driver for register
-	DriverName    = "boltdb"
+	DriverName = "boltdb"
+	// defaultBucket the default bucket name for boltdb
 	defaultBucket = "nscache-default"
 )
 
 func newCache(conn *url.URL) (nscache.NSCache, error) {
-	path, err := parseConnection(conn)
+	path, bucket, err := parseConnection(conn)
 	if err != nil {
 		return nil, err
 	}
@@ -25,16 +26,21 @@ func newCache(conn *url.URL) (nscache.NSCache, error) {
 	if err != nil {
 		return nil, err
 	}
-	return cache.NewCache(newStore(db, []byte(defaultBucket), encoding.DefaultSerializer))
+	return cache.NewCache(newStore(db, []byte(bucket), encoding.DefaultSerializer))
 }
 
 // parseConnection parse the boltdb connection string
-func parseConnection(u *url.URL) (path string, err error) {
+func parseConnection(u *url.URL) (path string, bucket string, err error) {
 	if u == nil {
-		return "", errors.New("invalid boltdb connection string")
+		bucket = defaultBucket
+		return path, bucket, errors.New("invalid boltdb connection string")
 	}
 	path = u.Host
-	return path, nil
+	bucket = u.Query().Get("bucket")
+	if len(bucket) == 0 {
+		bucket = defaultBucket
+	}
+	return path, bucket, nil
 }
 
 func init() {
