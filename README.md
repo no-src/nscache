@@ -50,6 +50,7 @@ func main() {
 		log.Error(err, "init cache error")
 		return
 	}
+	defer c.Close()
 
 	// write data
 	k := "hello"
