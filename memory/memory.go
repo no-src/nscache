@@ -78,6 +78,10 @@ func (c *memoryCache) Remove(k string) error {
 	return nil
 }
 
+func (c *memoryCache) Close() error {
+	return nil
+}
+
 func init() {
 	nscache.Register(DriverName, newCache)
 }
