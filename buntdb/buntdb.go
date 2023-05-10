@@ -89,6 +89,10 @@ func (c *buntDBCache) Remove(k string) error {
 	})
 }
 
+func (c *buntDBCache) Close() error {
+	return c.db.Close()
+}
+
 // parseBuntDBConnection parse the buntdb connection string
 func parseBuntDBConnection(u *url.URL) (path string, err error) {
 	if u == nil {

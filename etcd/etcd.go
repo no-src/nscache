@@ -83,6 +83,10 @@ func (c *etcdCache) Remove(k string) error {
 	return err
 }
 
+func (c *etcdCache) Close() error {
+	return c.client.Close()
+}
+
 // parseEtcdConnection parse the etcd connection string
 func parseEtcdConnection(u *url.URL) (c clientv3.Config, err error) {
 	if u == nil {

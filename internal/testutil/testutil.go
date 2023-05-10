@@ -37,6 +37,7 @@ func TestCache(t *testing.T, conn string, expiration time.Duration) {
 		t.Errorf("init cache error, err=%v", err)
 		return
 	}
+	defer c.Close()
 
 	testCacheReturnError(t, c, expiration)
 
@@ -122,6 +123,8 @@ func BenchmarkCacheGet(b *testing.B, conn string, expiration time.Duration) {
 		b.Errorf("init cache error, err=%v", err)
 		return
 	}
+	defer c.Close()
+
 	c.Set("hello", "world", expiration)
 	b.ResetTimer()
 	b.ReportAllocs()
@@ -141,6 +144,8 @@ func BenchmarkCacheSet(b *testing.B, conn string, expiration time.Duration) {
 		b.Errorf("init cache error, err=%v", err)
 		return
 	}
+	defer c.Close()
+
 	b.ResetTimer()
 	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
@@ -158,6 +163,8 @@ func BenchmarkCacheRemove(b *testing.B, conn string, expiration time.Duration) {
 		b.Errorf("init cache error, err=%v", err)
 		return
 	}
+	defer c.Close()
+
 	c.Set("hello", "world", expiration)
 	b.ResetTimer()
 	b.ReportAllocs()

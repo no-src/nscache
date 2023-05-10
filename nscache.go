@@ -23,6 +23,9 @@ type NSCache interface {
 
 	// Remove remove the specified key
 	Remove(k string) error
+
+	// Close close the cache component
+	Close() error
 }
 
 // NewCache get an instance of NSCache by connection string

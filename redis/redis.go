@@ -71,6 +71,10 @@ func (c *redisCache) Remove(k string) error {
 	return c.client.Del(context.Background(), k).Err()
 }
 
+func (c *redisCache) Close() error {
+	return c.client.Close()
+}
+
 // parseRedisConnection parse the redis connection string
 func parseRedisConnection(u *url.URL) (opt *redis.Options, err error) {
 	if u == nil {
