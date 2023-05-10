@@ -17,6 +17,8 @@ const (
 	EtcdConnectionString = "etcd://127.0.0.1:2379?dial_timeout=5s"
 	// RedisConnectionString a redis cache driver test connection string
 	RedisConnectionString = "redis://127.0.0.1:6379"
+	// BoltDBConnectionString a boltdb cache driver test connection string
+	BoltDBConnectionString = "boltdb://boltdb.db"
 	// DefaultExpiration the default expiration time for cache driver tests
 	DefaultExpiration = time.Second * 3
 )
