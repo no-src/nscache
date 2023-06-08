@@ -14,6 +14,7 @@ var (
 )
 
 func TestBoltDBCache(t *testing.T) {
+	testutil.TestCache(t, connectionString, testutil.NoExpiration)
 	testutil.TestCache(t, connectionString, expiration)
 	testutil.TestCache(t, connectionStringWithBucket, expiration)
 }

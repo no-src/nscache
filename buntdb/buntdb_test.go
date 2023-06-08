@@ -8,12 +8,16 @@ import (
 )
 
 var (
-	connectionString = testutil.BuntDBConnectionString
-	expiration       = testutil.DefaultExpiration
+	connectionString       = testutil.BuntDBConnectionString
+	memoryConnectionString = testutil.BuntDBMemoryConnectionString
+	expiration             = testutil.DefaultExpiration
 )
 
 func TestBuntDBCache(t *testing.T) {
+	testutil.TestCache(t, connectionString, testutil.NoExpiration)
+	testutil.TestCache(t, memoryConnectionString, testutil.NoExpiration)
 	testutil.TestCache(t, connectionString, expiration)
+	testutil.TestCache(t, memoryConnectionString, expiration)
 }
 
 func TestBuntDBCache_NewCache_WithNilURL(t *testing.T) {

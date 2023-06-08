@@ -12,7 +12,9 @@ const (
 	// MemoryConnectionString a memory cache driver test connection string
 	MemoryConnectionString = "memory:"
 	// BuntDBConnectionString a buntdb cache driver test connection string
-	BuntDBConnectionString = "buntdb://:memory:"
+	BuntDBConnectionString = "buntdb://buntdb.db"
+	// BuntDBMemoryConnectionString a buntdb memory cache driver test connection string
+	BuntDBMemoryConnectionString = "buntdb://:memory:"
 	// EtcdConnectionString a etcd cache driver test connection string
 	EtcdConnectionString = "etcd://127.0.0.1:2379?dial_timeout=5s"
 	// RedisConnectionString a redis cache driver test connection string
@@ -21,6 +23,8 @@ const (
 	BoltDBConnectionString = "boltdb://boltdb.db"
 	// DefaultExpiration the default expiration time for cache driver tests
 	DefaultExpiration = time.Second * 3
+	// NoExpiration means never expire
+	NoExpiration = 0
 )
 
 // TestCache test the cache with the passed connection string
@@ -67,6 +71,8 @@ func TestCache(t *testing.T, conn string, expiration time.Duration) {
 				return
 			}
 
+			time.Sleep(time.Millisecond)
+
 			// get data after set
 			err = c.Get(tc.k, &actual)
 			if err != nil {
@@ -77,12 +83,14 @@ func TestCache(t *testing.T, conn string, expiration time.Duration) {
 				return
 			}
 
-			// get data after data is expired
-			<-time.After(expiration + time.Second*2)
-			err = c.Get(tc.k, &actual)
-			if !errors.Is(err, nscache.ErrNil) {
-				t.Errorf("Get: expect to get error => %v, but get %v, k=%v", nscache.ErrNil, err, tc.k)
-				return
+			if expiration > 0 {
+				// get data after data is expired
+				<-time.After(expiration + time.Second*2)
+				err = c.Get(tc.k, &actual)
+				if !errors.Is(err, nscache.ErrNil) {
+					t.Errorf("Get: expect to get error => %v, but get %v, k=%v", nscache.ErrNil, err, tc.k)
+					return
+				}
 			}
 
 			// set data with long expiration time

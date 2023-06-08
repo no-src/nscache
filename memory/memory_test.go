@@ -12,5 +12,6 @@ var (
 )
 
 func TestMemoryCache(t *testing.T) {
+	testutil.TestCache(t, connectionString, testutil.NoExpiration)
 	testutil.TestCache(t, connectionString, expiration)
 }
