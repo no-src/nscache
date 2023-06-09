@@ -8,5 +8,6 @@ import (
 )
 
 func TestCache(t *testing.T) {
+	testutil.TestCache(t, testutil.MemoryConnectionString, testutil.NoExpiration)
 	testutil.TestCache(t, testutil.MemoryConnectionString, testutil.DefaultExpiration)
 }

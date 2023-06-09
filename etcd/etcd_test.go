@@ -13,6 +13,7 @@ var (
 )
 
 func TestEtcdCache(t *testing.T) {
+	testutil.TestCache(t, connectionString, testutil.NoExpiration)
 	testutil.TestCache(t, connectionString, expiration)
 }
 

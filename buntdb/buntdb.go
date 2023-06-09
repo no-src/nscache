@@ -71,8 +71,12 @@ func (c *buntDBCache) Set(k string, v any, expiration time.Duration) error {
 	if err != nil {
 		return err
 	}
+	expires := true
+	if expiration <= 0 {
+		expires = false
+	}
 	return c.db.Update(func(tx *buntdb.Tx) error {
-		_, _, setErr := tx.Set(k, string(data), &buntdb.SetOptions{Expires: true, TTL: expiration})
+		_, _, setErr := tx.Set(k, string(data), &buntdb.SetOptions{Expires: expires, TTL: expiration})
 		return setErr
 	})
 }

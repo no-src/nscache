@@ -20,6 +20,7 @@ func TestExtension(t *testing.T) {
 	}{
 		{testutil.MemoryConnectionString},
 		{testutil.BuntDBConnectionString},
+		{testutil.BuntDBMemoryConnectionString},
 		{testutil.EtcdConnectionString},
 		{testutil.RedisConnectionString},
 	}
