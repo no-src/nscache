@@ -3,7 +3,7 @@ module github.com/no-src/nscache
 go 1.18
 
 require (
-	github.com/no-src/log v0.1.10
+	github.com/no-src/log v0.2.3
 	github.com/redis/go-redis/v9 v9.0.5
 	github.com/tidwall/buntdb v1.3.0
 	go.etcd.io/bbolt v1.3.7
