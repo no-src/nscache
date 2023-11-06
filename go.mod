@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/no-src/log v0.3.1
-	github.com/redis/go-redis/v9 v9.2.1
+	github.com/redis/go-redis/v9 v9.3.0
 	github.com/tidwall/buntdb v1.3.0
 	go.etcd.io/bbolt v1.3.8
 	go.etcd.io/etcd/client/v3 v3.5.10
