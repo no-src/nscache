@@ -21,6 +21,8 @@ const (
 	RedisConnectionString = "redis://127.0.0.1:6379"
 	// BoltDBConnectionString a boltdb cache driver test connection string
 	BoltDBConnectionString = "boltdb://boltdb.db"
+	// FreeCacheConnectionString a freecache driver test connection string
+	FreeCacheConnectionString = "freecache://?cache_size=10000000"
 	// DefaultExpiration the default expiration time for cache driver tests
 	DefaultExpiration = time.Second * 3
 	// NoExpiration means never expire

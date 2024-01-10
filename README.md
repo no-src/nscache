@@ -21,13 +21,14 @@ string and use it.
 
 Current support following cache drivers
 
-| Driver | Import Driver Package              | Connection String Example                   |
-|--------|------------------------------------|---------------------------------------------|
-| Memory | `github.com/no-src/nscache/memory` | `memory:`                                   |
-| Redis  | `github.com/no-src/nscache/redis`  | `redis://127.0.0.1:6379`                    |
-| BuntDB | `github.com/no-src/nscache/buntdb` | `buntdb://:memory:` or `buntdb://buntdb.db` |
-| Etcd   | `github.com/no-src/nscache/etcd`   | `etcd://127.0.0.1:2379?dial_timeout=5s`     |
-| BoltDB | `github.com/no-src/nscache/boltdb` | `boltdb://boltdb.db`                        |
+| Driver    | Import Driver Package                 | Connection String Example                   |
+|-----------|---------------------------------------|---------------------------------------------|
+| Memory    | `github.com/no-src/nscache/memory`    | `memory:`                                   |
+| Redis     | `github.com/no-src/nscache/redis`     | `redis://127.0.0.1:6379`                    |
+| BuntDB    | `github.com/no-src/nscache/buntdb`    | `buntdb://:memory:` or `buntdb://buntdb.db` |
+| Etcd      | `github.com/no-src/nscache/etcd`      | `etcd://127.0.0.1:2379?dial_timeout=5s`     |
+| BoltDB    | `github.com/no-src/nscache/boltdb`    | `boltdb://boltdb.db`                        |
+| FreeCache | `github.com/no-src/nscache/freecache` | `freecache://?cache_size=10000000`          |
 
 For example, initial a memory cache and write, read and remove data.
 
