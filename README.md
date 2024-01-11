@@ -29,6 +29,7 @@ Current support following cache drivers
 | Etcd      | `github.com/no-src/nscache/etcd`      | `etcd://127.0.0.1:2379?dial_timeout=5s`     |
 | BoltDB    | `github.com/no-src/nscache/boltdb`    | `boltdb://boltdb.db`                        |
 | FreeCache | `github.com/no-src/nscache/freecache` | `freecache://?cache_size=10000000`          |
+| BigCache  | `github.com/no-src/nscache/bigcache`  | `bigcache://?eviction=10m`                  |
 
 For example, initial a memory cache and write, read and remove data.
 

@@ -4,6 +4,7 @@ import (
 	"testing"
 	"time"
 
+	_ "github.com/no-src/nscache/bigcache"
 	_ "github.com/no-src/nscache/buntdb"
 	_ "github.com/no-src/nscache/etcd"
 	_ "github.com/no-src/nscache/freecache"
@@ -25,6 +26,7 @@ func TestExtension(t *testing.T) {
 		{testutil.EtcdConnectionString},
 		{testutil.RedisConnectionString},
 		{testutil.FreeCacheConnectionString},
+		{testutil.BigCacheConnectionString},
 	}
 	for _, tc := range testCases {
 		t.Run(tc.conn, func(t *testing.T) {

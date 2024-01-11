@@ -3,6 +3,7 @@ module github.com/no-src/nscache
 go 1.19
 
 require (
+	github.com/allegro/bigcache/v3 v3.1.0
 	github.com/coocood/freecache v1.2.4
 	github.com/no-src/log v0.3.1
 	github.com/redis/go-redis/v9 v9.4.0

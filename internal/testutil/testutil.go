@@ -23,10 +23,17 @@ const (
 	BoltDBConnectionString = "boltdb://boltdb.db"
 	// FreeCacheConnectionString a freecache driver test connection string
 	FreeCacheConnectionString = "freecache://?cache_size=10000000"
+	// BigCacheConnectionString a bigcache driver test connection string
+	BigCacheConnectionString = "bigcache://?eviction=10m"
 	// DefaultExpiration the default expiration time for cache driver tests
 	DefaultExpiration = time.Second * 3
 	// NoExpiration means never expire
 	NoExpiration = 0
+)
+
+const (
+	TestKey   = "hello"
+	TestValue = "world"
 )
 
 // TestCache test the cache with the passed connection string
