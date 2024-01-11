@@ -6,6 +6,7 @@ import (
 
 	_ "github.com/no-src/nscache/buntdb"
 	_ "github.com/no-src/nscache/etcd"
+	_ "github.com/no-src/nscache/freecache"
 	_ "github.com/no-src/nscache/memory"
 	_ "github.com/no-src/nscache/redis"
 
@@ -23,6 +24,7 @@ func TestExtension(t *testing.T) {
 		{testutil.BuntDBMemoryConnectionString},
 		{testutil.EtcdConnectionString},
 		{testutil.RedisConnectionString},
+		{testutil.FreeCacheConnectionString},
 	}
 	for _, tc := range testCases {
 		t.Run(tc.conn, func(t *testing.T) {
