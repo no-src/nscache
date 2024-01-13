@@ -1,7 +1,6 @@
 package cache
 
 import (
-	"sync"
 	"time"
 
 	"github.com/no-src/nscache"
@@ -14,7 +13,6 @@ type cache struct {
 	nscache.NSCacheExt
 
 	serializer encoding.Serializer
-	mu         sync.RWMutex
 	store      store.Store
 }
 
@@ -29,9 +27,7 @@ func NewCache(store store.Store) (nscache.NSCache, error) {
 }
 
 func (c *cache) Get(k string, v any) error {
-	c.mu.RLock()
 	md := c.store.Get(k)
-	c.mu.RUnlock()
 	if md == nil {
 		return nscache.ErrNil
 	}
@@ -43,8 +39,6 @@ func (c *cache) Get(k string, v any) error {
 }
 
 func (c *cache) Set(k string, v any, expiration time.Duration) error {
-	c.mu.Lock()
-	defer c.mu.Unlock()
 	data, err := c.serializer.Serialize(v)
 	if err != nil {
 		return err
@@ -53,8 +47,6 @@ func (c *cache) Set(k string, v any, expiration time.Duration) error {
 }
 
 func (c *cache) Remove(k string) error {
-	c.mu.Lock()
-	defer c.mu.Unlock()
 	return c.store.Remove(k)
 }
 
