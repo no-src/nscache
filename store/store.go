@@ -2,7 +2,7 @@ package store
 
 import "time"
 
-// Store the cache store interface
+// Store the cache store interface, it must be concurrency safe
 type Store interface {
 	// Get get cache data
 	Get(k string) *Data
