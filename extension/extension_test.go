@@ -27,6 +27,7 @@ func TestExtension(t *testing.T) {
 		{testutil.RedisConnectionString},
 		{testutil.FreeCacheConnectionString},
 		{testutil.BigCacheConnectionString},
+		{testutil.FastCacheConnectionString},
 	}
 	for _, tc := range testCases {
 		t.Run(tc.conn, func(t *testing.T) {
