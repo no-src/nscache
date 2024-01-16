@@ -30,6 +30,7 @@ Current support following cache drivers
 | BoltDB    | `github.com/no-src/nscache/boltdb`    | `boltdb://boltdb.db`                        |
 | FreeCache | `github.com/no-src/nscache/freecache` | `freecache://?cache_size=10000000`          |
 | BigCache  | `github.com/no-src/nscache/bigcache`  | `bigcache://?eviction=10m`                  |
+| FastCache | `github.com/no-src/nscache/fastcache` | `fastcache://?max_bytes=10000000`           |
 
 For example, initial a memory cache and write, read and remove data.
 

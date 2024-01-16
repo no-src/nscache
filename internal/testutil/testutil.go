@@ -22,6 +22,8 @@ const (
 	FreeCacheConnectionString = "freecache://?cache_size=10000000"
 	// BigCacheConnectionString a bigcache driver test connection string
 	BigCacheConnectionString = "bigcache://?eviction=10m"
+	// FastCacheConnectionString a fastcache driver test connection string
+	FastCacheConnectionString = "fastcache://?max_bytes=10000000"
 	// DefaultExpiration the default expiration time for cache driver tests
 	DefaultExpiration = time.Second * 3
 	// NoExpiration means never expire
