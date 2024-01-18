@@ -8,7 +8,7 @@ import (
 	"github.com/no-src/nscache"
 	"github.com/no-src/nscache/cache"
 	"github.com/no-src/nscache/encoding"
-	"github.com/no-src/nsgo/unit"
+	"github.com/no-src/nscache/internal/unit"
 )
 
 const (

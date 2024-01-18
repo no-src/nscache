@@ -10,7 +10,7 @@ import (
 	"github.com/no-src/nscache"
 	"github.com/no-src/nscache/encoding"
 	"github.com/no-src/nscache/extension"
-	"github.com/no-src/nsgo/unit"
+	"github.com/no-src/nscache/internal/unit"
 	clientv3 "go.etcd.io/etcd/client/v3"
 )
 
