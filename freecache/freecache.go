@@ -3,13 +3,13 @@ package freecache
 import (
 	"errors"
 	"net/url"
-	"strconv"
 	"time"
 
 	"github.com/coocood/freecache"
 	"github.com/no-src/nscache"
 	"github.com/no-src/nscache/encoding"
 	"github.com/no-src/nscache/extension"
+	"github.com/no-src/nsgo/unit"
 )
 
 const (
@@ -45,7 +45,7 @@ func parseConnection(u *url.URL) (cacheSize int, err error) {
 		return cacheSize, errors.New("invalid freecache connection string")
 	}
 	sizeStr := u.Query().Get("cache_size")
-	cacheSize, err = strconv.Atoi(sizeStr)
+	cacheSize, err = unit.ParseBytes(sizeStr)
 	if err != nil {
 		return cacheSize, errors.New("invalid cache_size parameter in the freecache connection string")
 	}

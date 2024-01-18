@@ -3,12 +3,12 @@ package fastcache
 import (
 	"errors"
 	"net/url"
-	"strconv"
 
 	"github.com/VictoriaMetrics/fastcache"
 	"github.com/no-src/nscache"
 	"github.com/no-src/nscache/cache"
 	"github.com/no-src/nscache/encoding"
+	"github.com/no-src/nsgo/unit"
 )
 
 const (
@@ -29,7 +29,7 @@ func parseConnection(u *url.URL) (maxBytes int, err error) {
 		return maxBytes, errors.New("invalid fastcache connection string")
 	}
 	maxBytesStr := u.Query().Get("max_bytes")
-	maxBytes, err = strconv.Atoi(maxBytesStr)
+	maxBytes, err = unit.ParseBytes(maxBytesStr)
 	if err != nil {
 		return maxBytes, errors.New("invalid max_bytes parameter in the fastcache connection string")
 	}

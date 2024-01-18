@@ -28,9 +28,9 @@ Current support following cache drivers
 | BuntDB    | `github.com/no-src/nscache/buntdb`    | `buntdb://:memory:` or `buntdb://buntdb.db` |
 | Etcd      | `github.com/no-src/nscache/etcd`      | `etcd://127.0.0.1:2379?dial_timeout=5s`     |
 | BoltDB    | `github.com/no-src/nscache/boltdb`    | `boltdb://boltdb.db`                        |
-| FreeCache | `github.com/no-src/nscache/freecache` | `freecache://?cache_size=10000000`          |
+| FreeCache | `github.com/no-src/nscache/freecache` | `freecache://?cache_size=50mib`             |
 | BigCache  | `github.com/no-src/nscache/bigcache`  | `bigcache://?eviction=10m`                  |
-| FastCache | `github.com/no-src/nscache/fastcache` | `fastcache://?max_bytes=10000000`           |
+| FastCache | `github.com/no-src/nscache/fastcache` | `fastcache://?max_bytes=50mib`              |
 
 For example, initial a memory cache and write, read and remove data.
 
