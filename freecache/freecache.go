@@ -9,7 +9,7 @@ import (
 	"github.com/no-src/nscache"
 	"github.com/no-src/nscache/encoding"
 	"github.com/no-src/nscache/extension"
-	"github.com/no-src/nscache/internal/unit"
+	"github.com/no-src/nsgo/unit"
 )
 
 const (
@@ -45,7 +45,7 @@ func parseConnection(u *url.URL) (cacheSize int, err error) {
 		return cacheSize, errors.New("invalid freecache connection string")
 	}
 	sizeStr := u.Query().Get("cache_size")
-	cacheSize, err = unit.ParseBytes(sizeStr)
+	cacheSize, err = unit.ParseBytesInt(sizeStr)
 	if err != nil {
 		return cacheSize, errors.New("invalid cache_size parameter in the freecache connection string")
 	}

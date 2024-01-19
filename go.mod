@@ -7,7 +7,7 @@ require (
 	github.com/allegro/bigcache/v3 v3.1.0
 	github.com/coocood/freecache v1.2.4
 	github.com/no-src/log v0.3.1
-	github.com/no-src/nsgo v0.0.3-0.20240118164801-aabd2865d2f7
+	github.com/no-src/nsgo v0.0.3
 	github.com/redis/go-redis/v9 v9.4.0
 	github.com/tidwall/buntdb v1.3.0
 	go.etcd.io/bbolt v1.3.8

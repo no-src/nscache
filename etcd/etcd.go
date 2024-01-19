@@ -10,7 +10,7 @@ import (
 	"github.com/no-src/nscache"
 	"github.com/no-src/nscache/encoding"
 	"github.com/no-src/nscache/extension"
-	"github.com/no-src/nscache/internal/unit"
+	"github.com/no-src/nsgo/unit"
 	clientv3 "go.etcd.io/etcd/client/v3"
 )
 
@@ -104,7 +104,7 @@ func parseEtcdConnection(u *url.URL) (c clientv3.Config, err error) {
 	}
 	maxCallSendMsgSizeValue := u.Query().Get("max_call_send_msg_size")
 	if len(maxCallSendMsgSizeValue) > 0 {
-		maxCallSendMsgSize, err := unit.ParseBytes(maxCallSendMsgSizeValue)
+		maxCallSendMsgSize, err := unit.ParseBytesInt(maxCallSendMsgSizeValue)
 		if err != nil {
 			return c, err
 		}
@@ -112,7 +112,7 @@ func parseEtcdConnection(u *url.URL) (c clientv3.Config, err error) {
 	}
 	maxCallRecvMsgSizeValue := u.Query().Get("max_call_recv_msg_size")
 	if len(maxCallRecvMsgSizeValue) > 0 {
-		maxCallRecvMsgSize, err := unit.ParseBytes(maxCallRecvMsgSizeValue)
+		maxCallRecvMsgSize, err := unit.ParseBytesInt(maxCallRecvMsgSizeValue)
 		if err != nil {
 			return c, err
 		}
