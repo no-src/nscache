@@ -10,7 +10,7 @@ require (
 	github.com/no-src/nsgo v0.0.3
 	github.com/redis/go-redis/v9 v9.5.1
 	github.com/tidwall/buntdb v1.3.0
-	go.etcd.io/bbolt v1.3.8
+	go.etcd.io/bbolt v1.3.9
 	go.etcd.io/etcd/client/v3 v3.5.12
 )
 
