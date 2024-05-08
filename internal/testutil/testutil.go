@@ -16,6 +16,8 @@ const (
 	EtcdConnectionString = "etcd://127.0.0.1:2379?dial_timeout=5s"
 	// RedisConnectionString a redis cache driver test connection string
 	RedisConnectionString = "redis://127.0.0.1:6379"
+	// RedisClusterConnectionString a redis cluster cache driver test connection string
+	RedisClusterConnectionString = "redis-cluster://127.0.0.1:7001?addr=127.0.0.1:7002&addr=127.0.0.1:7003"
 	// BoltDBConnectionString a boltdb cache driver test connection string
 	BoltDBConnectionString = "boltdb://boltdb.db"
 	// FreeCacheConnectionString a freecache driver test connection string
