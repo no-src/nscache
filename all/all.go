@@ -8,4 +8,5 @@ import (
 	_ "github.com/no-src/nscache/freecache"
 	_ "github.com/no-src/nscache/memory"
 	_ "github.com/no-src/nscache/redis"
+	_ "github.com/no-src/nscache/redis_cluster"
 )

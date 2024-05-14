@@ -21,16 +21,17 @@ string and use it.
 
 Current support following cache drivers
 
-| Driver    | Import Driver Package                 | Connection String Example                   |
-|-----------|---------------------------------------|---------------------------------------------|
-| Memory    | `github.com/no-src/nscache/memory`    | `memory:`                                   |
-| Redis     | `github.com/no-src/nscache/redis`     | `redis://127.0.0.1:6379`                    |
-| BuntDB    | `github.com/no-src/nscache/buntdb`    | `buntdb://:memory:` or `buntdb://buntdb.db` |
-| Etcd      | `github.com/no-src/nscache/etcd`      | `etcd://127.0.0.1:2379?dial_timeout=5s`     |
-| BoltDB    | `github.com/no-src/nscache/boltdb`    | `boltdb://boltdb.db`                        |
-| FreeCache | `github.com/no-src/nscache/freecache` | `freecache://?cache_size=50mib`             |
-| BigCache  | `github.com/no-src/nscache/bigcache`  | `bigcache://?eviction=10m`                  |
-| FastCache | `github.com/no-src/nscache/fastcache` | `fastcache://?max_bytes=50mib`              |
+| Driver        | Import Driver Package                     | Connection String Example                                                |
+|---------------|-------------------------------------------|--------------------------------------------------------------------------|
+| Memory        | `github.com/no-src/nscache/memory`        | `memory:`                                                                |
+| Redis         | `github.com/no-src/nscache/redis`         | `redis://127.0.0.1:6379`                                                 |
+| Redis Cluster | `github.com/no-src/nscache/redis_cluster` | `redis-cluster://127.0.0.1:7001?addr=127.0.0.1:7002&addr=127.0.0.1:7003` |
+| BuntDB        | `github.com/no-src/nscache/buntdb`        | `buntdb://:memory:` or `buntdb://buntdb.db`                              |
+| Etcd          | `github.com/no-src/nscache/etcd`          | `etcd://127.0.0.1:2379?dial_timeout=5s`                                  |
+| BoltDB        | `github.com/no-src/nscache/boltdb`        | `boltdb://boltdb.db`                                                     |
+| FreeCache     | `github.com/no-src/nscache/freecache`     | `freecache://?cache_size=50mib`                                          |
+| BigCache      | `github.com/no-src/nscache/bigcache`      | `bigcache://?eviction=10m`                                               |
+| FastCache     | `github.com/no-src/nscache/fastcache`     | `fastcache://?max_bytes=50mib`                                           |
 
 For example, initial a memory cache and write, read and remove data.
 
