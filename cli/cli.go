@@ -4,7 +4,7 @@ import (
 	"bufio"
 	"errors"
 	"fmt"
-	"os"
+	"io"
 	"slices"
 	"strings"
 
@@ -15,16 +15,17 @@ import (
 
 var (
 	errNotEnoughArgs = errors.New("not enough arguments")
+	errInvalidArg    = errors.New("invalid argument")
 )
 
-func Start(conn string) error {
+func Start(conn string, r io.Reader) error {
 	cache, err := nscache.NewCache(conn)
 	if err != nil {
 		return fmt.Errorf("%w connect to cache error", err)
 	}
 	defer cache.Close()
 	log.Info("connect to cache success => %s", conn)
-	scanner := bufio.NewScanner(os.Stdin)
+	scanner := bufio.NewScanner(r)
 	for scanner.Scan() {
 		line := scanner.Text()
 		args := strings.Split(line, " ")

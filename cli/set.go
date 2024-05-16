@@ -19,7 +19,7 @@ func set(args []string, cache nscache.NSCache) (err error) {
 	if len(args) > 3 {
 		expire, err = time.ParseDuration(args[3])
 		if err != nil {
-			return fmt.Errorf("%w parse expiration time error", err)
+			return fmt.Errorf("%w %w parse expiration time error", errInvalidArg, err)
 		}
 	}
 	err = cache.Set(key, value, expire)
