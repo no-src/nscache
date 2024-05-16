@@ -6,7 +6,7 @@ require (
 	github.com/VictoriaMetrics/fastcache v1.12.2
 	github.com/allegro/bigcache/v3 v3.1.0
 	github.com/coocood/freecache v1.2.4
-	github.com/no-src/log v0.3.1
+	github.com/no-src/log v0.3.2-0.20240510160217-70ec50cb2f59
 	github.com/no-src/nsgo v0.0.3
 	github.com/redis/go-redis/v9 v9.5.1
 	github.com/tidwall/buntdb v1.3.0
@@ -43,4 +43,5 @@ require (
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20230822172742-b8732ec3820d // indirect
 	google.golang.org/grpc v1.59.0 // indirect
 	google.golang.org/protobuf v1.33.0 // indirect
+	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
