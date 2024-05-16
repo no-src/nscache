@@ -13,5 +13,5 @@ func main() {
 		log.Error(nil, "please input cache connection string")
 		return
 	}
-	log.ErrorIf(cli.Start(os.Args[1]), "start cli error")
+	log.ErrorIf(cli.Start(os.Args[1], os.Stdin), "start cli error")
 }
