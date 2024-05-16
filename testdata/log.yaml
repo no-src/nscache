@@ -1,0 +1,17 @@
+loggers:
+  - name: "console logger"
+    type: "console"
+    level: "debug"
+    format: "text"
+    time-format: "2006-01-02 15:04:05"
+    sample: 1
+  - name: "file logger"
+    type: "file"
+    level: "debug"
+    format: "json"
+    time-format: "2006-01-02 15:04:05"
+    log-dir: "./logs"
+    log-file-prefix: "nscache_"
+    auto-flush: true
+    auto-flush-interval: 3s
+    sample: 1
