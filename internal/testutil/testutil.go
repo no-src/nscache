@@ -26,6 +26,8 @@ const (
 	BigCacheConnectionString = "bigcache://?eviction=10m"
 	// FastCacheConnectionString a fastcache driver test connection string
 	FastCacheConnectionString = "fastcache://?max_bytes=50mib"
+	// ProxyCacheConnectionString a proxy driver test connection string
+	ProxyCacheConnectionString = "proxy://127.0.0.1:8080"
 	// DefaultExpiration the default expiration time for cache driver tests
 	DefaultExpiration = time.Second * 3
 	// NoExpiration means never expire
