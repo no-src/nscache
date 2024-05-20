@@ -18,6 +18,7 @@ var (
 	errInvalidArg    = errors.New("invalid argument")
 )
 
+// Start start the nscache cli with the connection string and input reader
 func Start(conn string, r io.Reader) error {
 	cache, err := nscache.NewCache(conn)
 	if err != nil {

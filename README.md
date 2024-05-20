@@ -32,6 +32,7 @@ Current support following cache drivers
 | FreeCache     | `github.com/no-src/nscache/freecache`     | `freecache://?cache_size=50mib`                                          |
 | BigCache      | `github.com/no-src/nscache/bigcache`      | `bigcache://?eviction=10m`                                               |
 | FastCache     | `github.com/no-src/nscache/fastcache`     | `fastcache://?max_bytes=50mib`                                           |
+| Proxy         | `github.com/no-src/nscache/proxy/client`  | `proxy://127.0.0.1:8080`                                                 |
 
 For example, initial a memory cache and write, read and remove data.
 
@@ -74,4 +75,46 @@ func main() {
 		return
 	}
 }
+```
+
+## Command Line Tool
+
+You can use the command line tool to operate all the cache drivers that `nscache` supports.
+
+Install the command line tool `nscache-cli`.
+
+```bash
+go install github.com/no-src/nscache/cmd/nscache-cli@latest
+```
+
+Run the cli tool with specified cache driver connection string to operate cache.
+
+```bash
+nscache-cli memory:
+```
+
+## Proxy
+
+### Proxy Server
+
+Install the proxy server `nscache-server`.
+
+```bash
+go install github.com/no-src/nscache/cmd/nscache-server@latest
+```
+
+Run the proxy server with specified listen address and cache driver connection string.
+
+```bash
+nscache-server -addr=:8080 -conn=memory:
+```
+
+### Proxy Client
+
+You can use the code to operate cache proxy server like the example code in the [Quick Start](#quick-start) section.
+
+Or use the `nscache-cli` to connect to the proxy server and operate cache.
+
+```bash
+nscache-cli proxy://127.0.0.1:8080
 ```
