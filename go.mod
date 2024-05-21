@@ -5,6 +5,7 @@ go 1.22.3
 require (
 	github.com/VictoriaMetrics/fastcache v1.12.2
 	github.com/allegro/bigcache/v3 v3.1.0
+	github.com/bradfitz/gomemcache v0.0.0-20230905024940-24af94b03874
 	github.com/coocood/freecache v1.2.4
 	github.com/no-src/log v0.3.2
 	github.com/no-src/nsgo v0.0.4-0.20240519145915-aa43cda63a0f

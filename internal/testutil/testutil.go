@@ -28,6 +28,8 @@ const (
 	FastCacheConnectionString = "fastcache://?max_bytes=50mib"
 	// ProxyCacheConnectionString a proxy driver test connection string
 	ProxyCacheConnectionString = "proxy://127.0.0.1:8080"
+	// MemcachedConnectionString a memcached cache driver test connection string
+	MemcachedConnectionString = "memcached://127.0.0.1:11211"
 	// DefaultExpiration the default expiration time for cache driver tests
 	DefaultExpiration = time.Second * 3
 	// NoExpiration means never expire

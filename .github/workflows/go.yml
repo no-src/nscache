@@ -42,6 +42,11 @@ jobs:
         ports:
           - 2379:2379
 
+      memcached:
+        image: memcached
+        ports:
+          - 11211:11211
+
     steps:
       - uses: actions/checkout@v4
 
