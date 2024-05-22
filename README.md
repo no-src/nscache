@@ -32,6 +32,7 @@ Current support following cache drivers
 | FreeCache     | `github.com/no-src/nscache/freecache`     | `freecache://?cache_size=50mib`                                          |
 | BigCache      | `github.com/no-src/nscache/bigcache`      | `bigcache://?eviction=10m`                                               |
 | FastCache     | `github.com/no-src/nscache/fastcache`     | `fastcache://?max_bytes=50mib`                                           |
+| Memcached     | `github.com/no-src/nscache/memcached`     | `memcached://127.0.0.1:11211`                                            |
 | Proxy         | `github.com/no-src/nscache/proxy/client`  | `proxy://127.0.0.1:8080`                                                 |
 
 For example, initial a memory cache and write, read and remove data.
