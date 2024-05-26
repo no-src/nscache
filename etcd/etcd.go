@@ -92,7 +92,11 @@ func parseEtcdConnection(u *url.URL) (c clientv3.Config, err error) {
 	if u == nil {
 		return c, errors.New("invalid etcd connection string")
 	}
-	c.Endpoints = []string{u.Host}
+
+	c.Endpoints = append(c.Endpoints, u.Host)
+	for _, addr := range u.Query()["addr"] {
+		c.Endpoints = append(c.Endpoints, addr)
+	}
 
 	dialTimeoutValue := u.Query().Get("dial_timeout")
 	if len(dialTimeoutValue) > 0 {
