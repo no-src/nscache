@@ -12,7 +12,7 @@ require (
 	github.com/redis/go-redis/v9 v9.5.1
 	github.com/tidwall/buntdb v1.3.0
 	go.etcd.io/bbolt v1.3.10
-	go.etcd.io/etcd/client/v3 v3.5.13
+	go.etcd.io/etcd/client/v3 v3.5.14
 )
 
 require (
@@ -38,8 +38,8 @@ require (
 	github.com/tidwall/pretty v1.2.0 // indirect
 	github.com/tidwall/rtred v0.1.2 // indirect
 	github.com/tidwall/tinyqueue v0.1.1 // indirect
-	go.etcd.io/etcd/api/v3 v3.5.13 // indirect
-	go.etcd.io/etcd/client/pkg/v3 v3.5.13 // indirect
+	go.etcd.io/etcd/api/v3 v3.5.14 // indirect
+	go.etcd.io/etcd/client/pkg/v3 v3.5.14 // indirect
 	go.uber.org/atomic v1.7.0 // indirect
 	go.uber.org/mock v0.4.0 // indirect
 	go.uber.org/multierr v1.6.0 // indirect
