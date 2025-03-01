@@ -1,6 +1,7 @@
 module github.com/no-src/nscache
 
 go 1.22.3
+toolchain go1.23.6
 
 require (
 	github.com/VictoriaMetrics/fastcache v1.12.2
@@ -11,7 +12,7 @@ require (
 	github.com/no-src/nsgo v0.0.4-0.20240519145915-aa43cda63a0f
 	github.com/redis/go-redis/v9 v9.7.0
 	github.com/tidwall/buntdb v1.3.2
-	go.etcd.io/bbolt v1.3.11
+	go.etcd.io/bbolt v1.4.0
 	go.etcd.io/etcd/client/v3 v3.5.18
 )
 
