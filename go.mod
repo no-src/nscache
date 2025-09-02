@@ -11,7 +11,7 @@ require (
 	github.com/no-src/nsgo v0.1.0
 	github.com/redis/go-redis/v9 v9.11.0
 	github.com/tidwall/buntdb v1.3.2
-	go.etcd.io/bbolt v1.3.11
+	go.etcd.io/bbolt v1.4.3
 	go.etcd.io/etcd/client/v3 v3.6.1
 )
 
