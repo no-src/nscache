@@ -9,7 +9,7 @@ require (
 	github.com/coocood/freecache v1.2.4
 	github.com/no-src/log v0.3.2
 	github.com/no-src/nsgo v0.1.0
-	github.com/redis/go-redis/v9 v9.16.0
+	github.com/redis/go-redis/v9 v9.18.0
 	github.com/tidwall/buntdb v1.3.2
 	go.etcd.io/bbolt v1.4.3
 	go.etcd.io/etcd/client/v3 v3.6.6
@@ -36,6 +36,7 @@ require (
 	github.com/tidwall/tinyqueue v0.1.1 // indirect
 	go.etcd.io/etcd/api/v3 v3.6.6 // indirect
 	go.etcd.io/etcd/client/pkg/v3 v3.6.6 // indirect
+	go.uber.org/atomic v1.11.0 // indirect
 	go.uber.org/mock v0.5.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.27.0 // indirect
