@@ -6,7 +6,7 @@ require (
 	github.com/VictoriaMetrics/fastcache v1.13.2
 	github.com/allegro/bigcache/v3 v3.1.0
 	github.com/bradfitz/gomemcache v0.0.0-20230905024940-24af94b03874
-	github.com/coocood/freecache v1.2.4
+	github.com/coocood/freecache v1.2.5
 	github.com/no-src/log v0.3.2
 	github.com/no-src/nsgo v0.1.0
 	github.com/redis/go-redis/v9 v9.16.0
